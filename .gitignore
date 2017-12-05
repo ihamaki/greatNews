@@ -1,1 +1,8 @@
 /target/
+
+.idea/
+greatNews.iml
+
+.classpath
+.project
+.settings/

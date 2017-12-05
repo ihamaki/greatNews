@@ -1,12 +1,29 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Great News</title>
+</head>
+<body>
 
-<html>
-    <head>
-        <title>News</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <h1>Great News!</h1>
-    </body>
+<h2>News</h2>
+
+<div>
+    <ul>
+        <li th:each="news: ${newsList}" th:text="${news.title}"></li>
+    </ul>
+</div>
+
+
+<h2>Add new</h2>
+
+<form method="POST" th:action="@{/news}">
+    Title: <input type="text" name="title"/><br/>
+    Lead:  <textarea cols="25" rows="7" name="lead"></textarea><br />
+    Text:  <textarea cols="25" rows="7" name="text"></textarea><br />
+    <input type="submit" value="Add"/>
+</form>
+
+</body>
+
 </html>
