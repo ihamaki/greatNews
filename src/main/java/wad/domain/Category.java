@@ -1,5 +1,6 @@
 package wad.domain;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,10 +14,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Author extends AbstractPersistable<Long> {
+public class Category extends AbstractPersistable<Long> {
 
     private String name;
 
-    @ManyToMany(mappedBy = "authors")
+    @ManyToMany(mappedBy = "categories")
     private List<News> newsList;
 }

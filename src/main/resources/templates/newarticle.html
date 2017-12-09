@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Great News</title>
+</head>
+<body>
+
+<div class="topnav" id="myTopnav">
+    <a href="/news">All</a>
+    <a href="/categories">Categories</a>
+    <a class="active">New article</a>
+</div>
+
+<h2>New article</h2>
+
+<form method="POST" th:action="@{/news/add}">
+    Title: <input type="text" name="title"/><br/>
+    Lead: <textarea cols="25" rows="7" name="lead"></textarea><br/>
+    Text: <textarea cols="25" rows="7" name="text"></textarea><br/>
+    Authors: <input type="text" name="authors"/><br/>
+    Categories: <input type="text" name="categories"/><br/>
+    <input type="submit" value="Add"/>
+</form>
+
+</body>
+
+</html>
