@@ -3,13 +3,15 @@ package wad.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import wad.domain.News;
+import wad.repository.CategoryRepository;
 import wad.repository.NewsRepository;
+import wad.service.AuthorService;
+import wad.service.CategoryService;
 import wad.service.NewsService;
+
+import java.time.LocalDateTime;
 
 @Controller
 public class NewsController {
@@ -19,6 +21,12 @@ public class NewsController {
 
     @Autowired
     private NewsService newsService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private AuthorService authorService;
 
     @GetMapping("/news")
     public String getAll(Model model) {
@@ -32,6 +40,12 @@ public class NewsController {
         return "single";
     }
 
+    @DeleteMapping("/news/{id}")
+    public String deleteSingle(@PathVariable Long id) {
+        newsRepository.deleteById(id);
+        return "redirect:/news";
+    }
+
     @GetMapping("/news/add")
     public String addArticle() {
         return "newarticle";
@@ -42,8 +56,28 @@ public class NewsController {
     public String postNewsItem(@RequestParam String title, @RequestParam String lead, @RequestParam String text,
                                @RequestParam String authors, @RequestParam String categories) {
         News news = new News(title, lead, text);
+        newsService.setCategories(news, categoryService.getCategories(categories));
+        newsService.setAuthors(news, authorService.getAuthors(authors));
         newsRepository.save(news);
         return "redirect:/news";
+    }
+
+    @GetMapping("/news/{id}/edit")
+    public String getEditPage(Model model, @PathVariable Long id) {
+        model.addAttribute("news", newsRepository.getOne(id));
+        return "edit";
+    }
+
+    @PostMapping("/news/{id}/edit")
+    public String editSingle(@PathVariable Long id, @RequestParam String title, @RequestParam String lead,
+                             @RequestParam String text, @RequestParam String authors, @RequestParam String categories) {
+        News news = newsRepository.getOne(id);
+        news.setTitle(title);
+        news.setLead(lead);
+        news.setText(text);
+        news.setPublished(LocalDateTime.now());
+        newsRepository.save(news);
+        return "redirect:/news/{id}";
     }
 
 }

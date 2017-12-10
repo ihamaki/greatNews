@@ -1,33 +1,35 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Great News</title>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Great News</title>
 
-    <style>
-        ul, li {
-            list-style-type: none;
-        }
-    </style>
-</head>
-<body>
+        <style>
+            ul, li {
+                list-style-type: none;
+            }
+        </style>
+    </head>
+    <body>
 
-<div class="topnav" id="myTopnav">
-    <a class="active">All</a>
-    <a href="/categories">Categories</a>
-    <a href="/news/add">New article</a>
-</div>
+        <div class="topnav" id="myTopnav">
+            <a class="active">All</a>
+            <a href="/categories">Categories</a>
+            <a href="/news/add">New article</a>
+        </div>
 
-<h2>News</h2>
+        <h2>News</h2>
 
-<div>
-    <ul th:each="news: ${newsList}">
-        <a th:href="@{/news/{id}(id=${news.id})}" th:text="${news.title}">title</a><br/>
-        <span th:text="${news.lead}">lead</span><br/>
-        <span th:text="${news.published}">published</span><br/>
-    </ul>
-</div>
+        <div>
+            <ul>
+                <li th:each="news: ${newsList}">
+                    <a th:href="@{/news/{id}(id=${news.id})}" th:text="${news.title}">title</a><br/>
+                    <span th:text="${news.lead}">lead</span><br/>
+                    <span th:text="${news.published}">published</span><br/>
+                </li>
+            </ul>
+        </div>
 
-</body>
+    </body>
 
 </html>

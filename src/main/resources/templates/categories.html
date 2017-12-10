@@ -1,31 +1,31 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Great News</title>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Great News</title>
 
-    <style>
-        ul, li {
-            list-style-type: none;
-        }
-    </style>
-</head>
-<body>
+        <style>
+            ul, li {
+                list-style-type: none;
+            }
+        </style>
+    </head>
+    <body>
 
-<div class="topnav" id="myTopnav">
-    <a href="/news">All</a>
-    <a class="active">Categories</a>
-    <a href="/news/add">New article</a>
-</div>
+        <div class="topnav" id="myTopnav">
+            <a href="/news">All</a>
+            <a class="active">Categories</a>
+            <a href="/news/add">New article</a>
+        </div>
 
-<h2>Categories</h2>
+        <h2>Categories</h2>
 
-<div>
-    <ul th:each="category: ${categories}">
-        <li th:text="${category.name}"></li>
-    </ul>
-</div>
+        <div>
+            <ul th:each="category: ${categories}">
+                <li th:text="${category.name}"></li>
+            </ul>
+        </div>
 
-</body>
+    </body>
 
 </html>

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class News extends AbstractPersistable<Long> {
 
     private String title;
-    private String lead;
+    private  String lead;
     private String text;
     private LocalDateTime published;
 
@@ -35,5 +36,17 @@ public class News extends AbstractPersistable<Long> {
         this.published = LocalDateTime.now();
         this.authors = new ArrayList<>();
         this.categories = new ArrayList<>();
+    }
+
+    public void addCategory(Category category) {
+        if (!categories.contains(category)) {
+            categories.add(category);
+        }
+    }
+
+    public void addAuthor(Author author) {
+        if (!authors.contains(author)) {
+            authors.add(author);
+        }
     }
 }

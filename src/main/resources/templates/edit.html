@@ -41,23 +41,31 @@
         <div class="topnav" id="myTopnav">
             <a href="/news">All</a>
             <a href="/categories">Categories</a>
-            <a class="active">New article</a>
+            <a href="/news/add">New article</a>
         </div>
 
-        <h2>New article</h2>
 
-        <form method="POST" th:action="@{/news/add}">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li style="float:right"><a class="active" href="#about">About</a></li>
+        </ul>
+
+        <h2>Edit article</h2>
+
+        <form method="POST" th:action="@{/news/{id}/edit(id=${news.id})}">
             <label for="title">Title</label><br/>
-            <input type="text" id="title" name="title"/><br/>
+            <input type="text" id="title" name="title" th:value="${news.title}"/><br/>
             <label for="lead">Lead</label><br/>
-            <textarea id="lead" name="lead"></textarea><br/>
+            <textarea id="lead" name="lead" th:value="${news.lead}"></textarea><br/>
             <label for="text">Text</label><br/>
-            <textarea id="text" name="text"></textarea><br/>
+            <textarea id="text" name="text" th:value="${news.text}"></textarea><br/>
             <label for="authors">Authors</label><br/>
             <input type="text" id="authors" name="authors"/><br/>
             <label for="categories">Categories</label><br/>
             <input type="text" id="categories" name="categories"/><br/>
-            <input type="submit" value="Add"/>
+            <input type="submit" value="Done"/>
         </form>
 
     </body>

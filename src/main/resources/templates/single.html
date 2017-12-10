@@ -1,28 +1,46 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Great News</title>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Great News</title>
 
-    <style>
-        ul, li {
-            list-style-type: none;
-        }
-    </style>
-</head>
-<body>
+        <style>
+            ul, li {
+                list-style-type: none;
+            }
+        </style>
+    </head>
+    <body>
 
-<div class="topnav" id="myTopnav">
-    <a href="/news">All</a>
-    <a href="/categories">Categories</a>
-    <a href="/news/add">New article</a>
-</div>
+        <div class="topnav" id="myTopnav">
+            <a href="/news">All</a>
+            <a href="/categories">Categories</a>
+            <a href="/news/add">New article</a>
+        </div>
 
-<h2 th:text="${news.title}">title</h2>
-<h3 th:text="${news.lead}">lead</h3>
-<p th:text="${news.text}">text</p>
-<p th:text="${news.published}">published</p>
+        <h2 th:text="${news.title}">title</h2>
+        <h3 th:text="${news.lead}">lead</h3>
+        <p th:text="${news.text}">text</p>
+        <p th:text="${news.published}">published</p>
+        <p> Authors </p>
+        <ul>
+            <li th:each="author: ${news.authors}">
+                <span th:text="${author.name}">category</span>
+            </li>
+        </ul>
+        <p> Categories </p>
+        <ul>
+            <li th:each="category: ${news.categories}">
+                <span th:text="${category.name}">category</span>
+            </li>
+        </ul>
+        <form th:action="@{/news/{id}(id=${news.id})}" th:method="DELETE">
+            <input type="submit" value="Delete"/>
+        </form>
+        <form th:action="@{/news/{id}/edit(id=${news.id})}" th:method="GET">
+            <input type="submit" value="Edit"/>
+        </form>
 
-</body>
+    </body>
 
 </html>
