@@ -20,7 +20,7 @@
 
         <h2 th:text="${news.title}">title</h2>
         <h3 th:text="${news.lead}">lead</h3>
-<!--        <img th:src="@{/news/{id}/picture(id=${news.id})}"/>-->
+        <img th:src="@{/news/{id}/picture(id=${news.id})}"/>
         <p th:text="${news.text}">text</p>
         <p>Published <span th:text="${news.published}"></span></p>
         <p> Authors </p>
