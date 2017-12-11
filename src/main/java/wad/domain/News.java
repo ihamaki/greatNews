@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +29,9 @@ public class News extends AbstractPersistable<Long> {
 
     @ManyToMany
     private List<Category> categories;
+
+    @OneToOne
+    private Picture picture;
 
     public News(String title, String lead, String text) {
         this.title = title;

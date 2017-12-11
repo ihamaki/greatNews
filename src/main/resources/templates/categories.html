@@ -21,8 +21,10 @@
         <h2>Categories</h2>
 
         <div>
-            <ul th:each="category: ${categories}">
-                <li th:text="${category.name}"></li>
+            <ul>
+                <li th:each="category: ${categories}">
+                    <a th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">category</a><br/>
+                </li>
             </ul>
         </div>
 

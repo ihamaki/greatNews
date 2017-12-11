@@ -44,29 +44,54 @@
             <a href="/news/add">New article</a>
         </div>
 
-
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#news">News</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li style="float:right"><a class="active" href="#about">About</a></li>
-        </ul>
-
         <h2>Edit article</h2>
 
-        <form method="POST" th:action="@{/news/{id}/edit(id=${news.id})}">
-            <label for="title">Title</label><br/>
-            <input type="text" id="title" name="title" th:value="${news.title}"/><br/>
-            <label for="lead">Lead</label><br/>
-            <textarea id="lead" name="lead" th:value="${news.lead}"></textarea><br/>
-            <label for="text">Text</label><br/>
-            <textarea id="text" name="text" th:value="${news.text}"></textarea><br/>
-            <label for="authors">Authors</label><br/>
-            <input type="text" id="authors" name="authors"/><br/>
-            <label for="categories">Categories</label><br/>
-            <input type="text" id="categories" name="categories"/><br/>
-            <input type="submit" value="Done"/>
+        <form method="POST" th:action="@{/news/{id}/edit(id=${news.id})}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title</label><br/>
+                <input type="text" id="title" name="title" th:value="${news.title}"/>
+            </div>
+            <div class="form-group">
+                <label for="lead">Lead</label><br/>
+                <textarea id="lead" name="lead" th:field="${news.lead}"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="text">Text</label><br/>
+                <textarea id="text" name="text" th:field="${news.text}"></textarea>
+            </div>
+            <div class="button">
+                <input type="file" name="file" id="file"/>
+            </div>
+            <div class="form-group">
+                <label for="authors">Authors</label><br/>
+                <input type="text" id="authors" name="authors"/>
+            </div>
+            <div class="form-group">
+                <label for="categories">Categories</label><br/>
+                <input type="text" id="categories" name="categories"/>
+            </div>
+            <div>
+                <input type="submit" value="Done"/>
+            </div>
         </form>
+
+        <form th:action="@{/news/{id}(id=${news.id})}" th:method="GET">
+            <input type="submit" value="Cancel"/>
+        </form>
+
+        <!--<form method="POST" th:action="@{/news/{id}/edit(id=${news.id})}">-->
+        <!--<label for="title">Title</label><br/>-->
+        <!--<input type="text" id="title" name="title" th:value="${news.title}"/><br/>-->
+        <!--<label for="lead">Lead</label><br/>-->
+        <!--<textarea id="lead" name="lead" th:field="${news.lead}"></textarea><br/>-->
+        <!--<label for="text">Text</label><br/>-->
+        <!--<textarea id="text" name="text" th:field="${news.text}"></textarea><br/>-->
+        <!--<label for="authors">Authors</label><br/>-->
+        <!--<input type="text" id="authors" name="authors"/><br/>-->
+        <!--<label for="categories">Categories</label><br/>-->
+        <!--<input type="text" id="categories" name="categories"/><br/>-->
+        <!--<input type="submit" value="Done"/>-->
+        <!--</form>-->
 
     </body>
 
