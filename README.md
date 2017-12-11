@@ -7,4 +7,4 @@ News application for great news
 
 [Application in Heroku](http://greatnews.herokuapp.com/)
 
-[Documentation](/documentation)
+[Documentation](/documentation/documentation.md)

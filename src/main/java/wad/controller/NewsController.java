@@ -1,6 +1,9 @@
 package wad.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -34,8 +37,9 @@ public class NewsController {
     private ValidationService validationService;
 
     @GetMapping("/news")
-    public String getAll(Model model) {
-        model.addAttribute("newsList", newsRepository.findAll());
+    public String getLatest(Model model) {
+        Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "published");
+        model.addAttribute("newsList", newsRepository.findAll(pageable));
         return "news";
     }
 
