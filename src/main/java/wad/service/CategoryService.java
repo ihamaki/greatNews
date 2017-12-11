@@ -2,6 +2,7 @@ package wad.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import wad.domain.Category;
 import wad.domain.News;
 import wad.repository.CategoryRepository;
@@ -16,6 +17,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Transactional
     public List<Category> getCategories(String categories) {
         List<Category> list = new ArrayList<>();
         String[] parts = categories.split(",");

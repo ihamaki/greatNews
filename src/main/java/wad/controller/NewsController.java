@@ -43,30 +43,25 @@ public class NewsController {
     private PictureService pictureService;
 
     @GetMapping("/news")
+    @Transactional
     public String getAll(Model model) {
         model.addAttribute("newsList", newsRepository.findAll());
         return "news";
     }
 
     @GetMapping("/news/{id}")
+    @Transactional
     public String getSingle(Model model, @PathVariable Long id) {
         model.addAttribute("news", newsRepository.getOne(id));
         return "single";
     }
 
     @DeleteMapping("/news/{id}")
+    @Transactional
     public String deleteSingle(@PathVariable Long id) {
         newsRepository.deleteById(id);
         return "redirect:/news";
     }
-
-//    @GetMapping(path = "/news/{id}/picture", produces = "image/png")
-//    @ResponseBody
-//    @Transactional
-//    public byte[] get(@PathVariable Long id) {
-//        News news = newsRepository.getOne(id);
-//        return pictureRepository.getOne(news.getPicture().getId()).getContent();
-//    }
 
     @GetMapping(path = "/news/{id}/picture", produces = "image/png")
     @ResponseBody
@@ -83,12 +78,13 @@ public class NewsController {
     }
 
     @GetMapping("/news/add")
+    @Transactional
     public String addArticle() {
         return "newarticle";
     }
 
-    @Transactional
     @PostMapping("/news/add")
+    @Transactional
     public String postNewsItem(@RequestParam String title,
                          @RequestParam String lead,
                          @RequestParam String text,
@@ -104,12 +100,14 @@ public class NewsController {
     }
 
     @GetMapping("/news/{id}/edit")
+    @Transactional
     public String getEditPage(Model model, @PathVariable Long id) {
         model.addAttribute("news", newsRepository.getOne(id));
         return "edit";
     }
 
     @PostMapping("/news/{id}/edit")
+    @Transactional
     public String editSingle(@PathVariable Long id,
                              @RequestParam String title,
                              @RequestParam String lead,

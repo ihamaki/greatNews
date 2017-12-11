@@ -2,6 +2,7 @@ package wad.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import wad.domain.Author;
 import wad.repository.AuthorRepository;
 
@@ -14,6 +15,7 @@ public class AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
 
+    @Transactional
     public List<Author> getAuthors(String authors) {
         List<Author> list = new ArrayList<>();
         String[] parts = authors.split(",");

@@ -18,7 +18,7 @@ public class PictureService {
     private PictureRepository pictureRepository;
 
     @Transactional
-    public Picture setPicture(MultipartFile file, Long id) throws IOException {
+    public Picture getPicture(MultipartFile file) throws IOException {
         Picture picture = new Picture();
 
         try {
@@ -34,15 +34,15 @@ public class PictureService {
         pictureRepository.save(picture);
         return picture;
     }
-
-    @Transactional
-    public Picture getPicture(MultipartFile file) throws IOException {
-        Picture picture = new Picture();
-        picture.setName(file.getName());
-        picture.setContentType(file.getContentType());
-        picture.setSize(file.getSize());
-        picture.setContent(file.getBytes());
-        pictureRepository.save(picture);
-        return picture;
-    }
+//
+//    @Transactional
+//    public Picture getPicture(MultipartFile file) throws IOException {
+//        Picture picture = new Picture();
+//        picture.setName(file.getName());
+//        picture.setContentType(file.getContentType());
+//        picture.setSize(file.getSize());
+//        picture.setContent(file.getBytes());
+//        pictureRepository.save(picture);
+//        return picture;
+//    }
 }
