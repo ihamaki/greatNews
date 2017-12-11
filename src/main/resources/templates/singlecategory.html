@@ -14,16 +14,17 @@
 
         <div class="topnav" id="myTopnav">
             <a href="/news">All</a>
-            <a class="active">Categories</a>
+            <a href="/categories">Categories</a>
             <a href="/news/add">New article</a>
         </div>
 
-        <h2>Categories</h2>
+        <h2>News filtered by category: <span th:text="${category.name}"></span></h2>
 
         <div>
             <ul>
-                <li th:each="category: ${categories}">
-                    <a th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">category</a><br/>
+                <li th:each="news: ${newsList}">
+                    <a th:href="@{/news/{id}(id=${news.id})}" th:text="${news.title}">title</a><br/>
+                    <span th:text="${news.published}">published</span><br/>
                 </li>
             </ul>
         </div>

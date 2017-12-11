@@ -2,18 +2,17 @@ package wad.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import wad.domain.News;
-import wad.repository.CategoryRepository;
 import wad.repository.NewsRepository;
 import wad.service.AuthorService;
 import wad.service.CategoryService;
 import wad.service.NewsService;
 
-import java.time.LocalDateTime;
-
 @Controller
+@Transactional
 public class NewsController {
 
     @Autowired
@@ -69,13 +68,16 @@ public class NewsController {
     }
 
     @PostMapping("/news/{id}/edit")
-    public String editSingle(@PathVariable Long id, @RequestParam String title, @RequestParam String lead,
-                             @RequestParam String text, @RequestParam String authors, @RequestParam String categories) {
+    public String editSingle(@PathVariable Long id,
+                             @RequestParam String title,
+                             @RequestParam String lead,
+                             @RequestParam String text,
+                             @RequestParam String authors,
+                             @RequestParam String categories) {
         News news = newsRepository.getOne(id);
-        news.setTitle(title);
-        news.setLead(lead);
-        news.setText(text);
-        news.setPublished(LocalDateTime.now());
+        newsService.editNews(news, title, lead, text);
+        newsService.setCategories(news, categoryService.getCategories(categories));
+        newsService.setAuthors(news, authorService.getAuthors(authors));
         newsRepository.save(news);
         return "redirect:/news/{id}";
     }

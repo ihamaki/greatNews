@@ -11,7 +11,6 @@
                 margin: 8px 0;
                 box-sizing: border-box;
             }
-
             textarea {
                 width: 70%;
                 height: 150px;
@@ -22,7 +21,6 @@
                 background-color: #f8f8f8;
                 resize: none;
             }
-
             input[type=submit] {
                 width: 70%;
                 background-color: #4CAF50;
@@ -47,17 +45,29 @@
         <h2>New article</h2>
 
         <form method="POST" th:action="@{/news/add}">
-            <label for="title">Title</label><br/>
-            <input type="text" id="title" name="title"/><br/>
-            <label for="lead">Lead</label><br/>
-            <textarea id="lead" name="lead"></textarea><br/>
-            <label for="text">Text</label><br/>
-            <textarea id="text" name="text"></textarea><br/>
-            <label for="authors">Authors</label><br/>
-            <input type="text" id="authors" name="authors"/><br/>
-            <label for="categories">Categories</label><br/>
-            <input type="text" id="categories" name="categories"/><br/>
-            <input type="submit" value="Add"/>
+            <div class="form-group">
+                <label for="title">Title</label><br/>
+                <input type="text" id="title" name="title"/>
+            </div>
+            <div class="form-group">
+                <label for="lead">Lead</label><br/>
+                <textarea id="lead" name="lead"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="text">Text</label><br/>
+                <textarea id="text" name="text"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="authors">Authors</label><br/>
+                <input type="text" id="authors" name="authors"/>
+            </div>
+            <div class="form-group">
+                <label for="categories">Categories</label><br/>
+                <input type="text" id="categories" name="categories"/>
+            </div>
+            <div>
+                <input type="submit" value="Add"/>
+            </div>
         </form>
 
     </body>
