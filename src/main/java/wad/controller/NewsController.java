@@ -55,13 +55,13 @@ public class NewsController {
         return "redirect:/news";
     }
 
-    @GetMapping(path = "/news/{id}/picture", produces = "image/png")
-    @ResponseBody
-    @Transactional
-    public byte[] get(@PathVariable Long id) {
-        News news = newsRepository.getOne(id);
-        return pictureRepository.getOne(news.getPicture().getId()).getContent();
-    }
+//    @GetMapping(path = "/news/{id}/picture", produces = "image/png")
+//    @ResponseBody
+//    @Transactional
+//    public byte[] get(@PathVariable Long id) {
+//        News news = newsRepository.getOne(id);
+//        return pictureRepository.getOne(news.getPicture().getId()).getContent();
+//    }
 
     @GetMapping("/news/add")
     public String addArticle() {
@@ -79,7 +79,7 @@ public class NewsController {
         News news = new News(title, lead, text);
         newsService.setCategories(news, categoryService.getCategories(categories));
         newsService.setAuthors(news, authorService.getAuthors(authors));
-        newsService.setPicture(news, pictureService.getPicture(picture));
+//        newsService.setPicture(news, pictureService.getPicture(picture));
         newsRepository.save(news);
         return "redirect:/news";
     }
@@ -102,7 +102,7 @@ public class NewsController {
         newsService.editNews(news, title, lead, text);
         newsService.setCategories(news, categoryService.getCategories(categories));
         newsService.setAuthors(news, authorService.getAuthors(authors));
-        newsService.setPicture(news, pictureService.getPicture(picture));
+//        newsService.setPicture(news, pictureService.getPicture(picture));
         newsRepository.save(news);
         return "redirect:/news/{id}";
     }
