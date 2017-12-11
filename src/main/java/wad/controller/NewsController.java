@@ -10,6 +10,9 @@ import wad.repository.NewsRepository;
 import wad.service.AuthorService;
 import wad.service.CategoryService;
 import wad.service.NewsService;
+import wad.service.ValidationService;
+
+import java.util.List;
 
 @Controller
 @Transactional
@@ -26,6 +29,9 @@ public class NewsController {
 
     @Autowired
     private AuthorService authorService;
+
+    @Autowired
+    private ValidationService validationService;
 
     @GetMapping("/news")
     public String getAll(Model model) {
@@ -52,8 +58,19 @@ public class NewsController {
 
 
     @PostMapping("/news/add")
-    public String postNewsItem(@RequestParam String title, @RequestParam String lead, @RequestParam String text,
-                               @RequestParam String authors, @RequestParam String categories) {
+    public String postNewsItem(Model model,
+                               @RequestParam String title,
+                               @RequestParam String lead,
+                               @RequestParam String text,
+                               @RequestParam String authors,
+                               @RequestParam String categories) {
+
+        List<String> errorMessages = validationService.validateNews(title, lead, text, authors, categories);
+        if (!errorMessages.isEmpty()) {
+            model.addAttribute("errors", errorMessages);
+            return "newarticle";
+        }
+
         News news = new News(title, lead, text);
         newsService.setCategories(news, categoryService.getCategories(categories));
         newsService.setAuthors(news, authorService.getAuthors(authors));
@@ -68,12 +85,20 @@ public class NewsController {
     }
 
     @PostMapping("/news/{id}/edit")
-    public String editSingle(@PathVariable Long id,
+    public String editSingle(Model model,
+                             @PathVariable Long id,
                              @RequestParam String title,
                              @RequestParam String lead,
                              @RequestParam String text,
                              @RequestParam String authors,
                              @RequestParam String categories) {
+
+        List<String> errorMessages = validationService.validateNews(title, lead, text, authors, categories);
+        if (!errorMessages.isEmpty()) {
+            model.addAttribute("errors", errorMessages);
+            return "redirect:/news/{id}/edit";
+        }
+
         News news = newsRepository.getOne(id);
         newsService.editNews(news, title, lead, text);
         newsService.setCategories(news, categoryService.getCategories(categories));

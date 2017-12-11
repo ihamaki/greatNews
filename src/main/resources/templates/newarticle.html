@@ -5,6 +5,12 @@
         <title>Great News</title>
 
         <style>
+            .error {
+                color: red;
+            }
+            ul, li {
+                list-style-type: none;
+            }
             input[type=text] {
                 width: 70%;
                 padding: 12px 20px;
@@ -43,6 +49,14 @@
         </div>
 
         <h2>New article</h2>
+
+        <div>
+            <ul>
+                <li th:each="error : ${errors}">
+                    <p class="error" th:text="${error}">error</p>
+                </li>
+            </ul>
+        </div>
 
         <form method="POST" th:action="@{/news/add}">
             <div class="form-group">

@@ -6,11 +6,14 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import sun.security.util.Length;
 
 @Data
 @NoArgsConstructor
@@ -18,9 +21,18 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class News extends AbstractPersistable<Long> {
 
+    @NotBlank
+    @Size(min = 1, max = 200)
     private String title;
+
+    @NotBlank
+    @Size(min = 1, max = 500)
     private  String lead;
+
+    @NotBlank
+    @Size(min = 1, max = 5000)
     private String text;
+
     private LocalDateTime published;
 
     @ManyToMany

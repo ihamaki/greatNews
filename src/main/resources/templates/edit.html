@@ -5,6 +5,12 @@
         <title>Great News</title>
 
         <style>
+            .error {
+                color: red;
+            }
+            ul, li {
+                list-style-type: none;
+            }
             input[type=text] {
                 width: 70%;
                 padding: 12px 20px;
@@ -40,6 +46,14 @@
             <a href="/news">All</a>
             <a href="/categories">Categories</a>
             <a href="/news/add">New article</a>
+        </div>
+
+        <div>
+            <ul>
+                <li th:each="error : ${errors}">
+                    <p class="error" th:text="${error}">error</p>
+                </li>
+            </ul>
         </div>
 
         <h2>Edit article</h2>
